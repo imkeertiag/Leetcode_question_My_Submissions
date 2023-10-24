@@ -21,7 +21,7 @@ public:
             int size = q.size() ;
             int maxim = INT_MIN ;
     
-            for(int i=0; i<size; i++){
+            for(int i=0; i<size; ++i){
                 TreeNode* node = q.front() ;
                 q.pop() ;
                 maxim = max(maxim , node->val) ;
