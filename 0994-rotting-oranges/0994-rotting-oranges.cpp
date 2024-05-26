@@ -1,5 +1,6 @@
 class Solution {
-public:
+public: 
+// time comlexity = O(n*m) ,, space comp = O(N*M)
     int orangesRotting(vector<vector<int>>& grid) {
         // we can only use bfs in this question
         int n = grid.size() ;
