@@ -1,37 +1,35 @@
-class Solution { // TC: O(n) SC: O(n) 
-public:bool forallcomponents(int start , int v , vector<vector<int>>& adj , int color[]){
-    queue<int> q ;
-    q.push(start) ;
-    color[start] = 0 ;
-    while(!q.empty()){
-        int node = q.front() ;
-        q.pop() ;
-        for(auto it: adj[node]){ 
-            //if the adj node is not coloured , you will get the opposite color of the node
+class Solution {
+public:bool bfs(int color[] , vector<vector<int>>& graph , int idx){
+     int v = graph.size() ;
+     queue<int> que ;
+     que.push(idx) ;
+     color[idx] = 0 ;
+     while(!que.empty()){
+        int node = que.front() ;
+        que.pop() ;
+        for(auto it: graph[node]){
             if(color[it] == -1){
-                color[it] = !color[node] ;
-                q.push(it) ;
+               color[it] = !color[node] ;
+               que.push(it) ;
             }
-            //is the adj node have same color , coloured before since the path is same
-            else if(color[it] == color[node]){
-                return false ;
+            else{
+                if(color[it]  == color[node])return false ;
             }
         }
-    }
+     }
     return true ;
 }
     bool isBipartite(vector<vector<int>>& graph) {
-        int V = graph.size() ;
-      int color[V] ;
-      // to check when different components 
-      for(int i=0; i<V; i++)color[i] = -1 ;
-        for(int i=0; i<V; i++){
+        int v = graph.size() ;
+        int color[v] ;
+        for(int i=0; i<v; i++)color[i] = -1 ;
+        // for all components 
+        for(int i=0; i<v; i++){
             if(color[i] == -1){
-                if(forallcomponents(i , V , graph , color) == false) {
-                    return false ;
-                }
+            if(bfs(color , graph , i) == false)return false ;
             }
+            
         }
-       return true ;
+        return true ;
     }
 };
