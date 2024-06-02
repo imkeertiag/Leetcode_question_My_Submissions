@@ -1,14 +1,14 @@
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        unordered_map<int,int> mp ;
+        // a ^ a = 0
+        int xorall = nums[0] , one=0 , two=0 ;
+        for(int i=1; i<nums.size(); i++)xorall ^= nums[i] ;
+        int lsb = (xorall & (xorall - 1))^xorall ;
         for(int i=0; i<nums.size(); i++){
-            mp[nums[i]]++ ;
+            if((nums[i] & lsb) == lsb)one ^= nums[i] ;
+            else two ^= nums[i] ;
         }
-        vector<int> ans ;
-        for(auto itr: mp){
-            if(itr.second == 1)ans.push_back(itr.first) ;
-        }
-        return ans ;
+        return {one , two} ;
     }
 };
