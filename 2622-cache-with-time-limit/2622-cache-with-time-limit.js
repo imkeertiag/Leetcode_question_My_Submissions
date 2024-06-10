@@ -2,7 +2,7 @@ class TimeLimitedCache {
     // Use a Map to store key-value pairs and associated expiration times
     cache = new Map();
     
-    set(key, value, duration) {
+    se(key, value, duration) {
         // Check if the key already exists in the cache
         const exist = this.cache.get(key);
         
